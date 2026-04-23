@@ -1,0 +1,58 @@
+/* Google Font for a professional look */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
+
+:root {
+    --primary-color: #3ecf8e; /* Supabase Green */
+    --bg-color: #f9fafb;
+    --card-bg: #ffffff;
+    --text-main: #111827;
+    --text-muted: #6b7280;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    margin: 0;
+    padding: 40px 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.container {
+    width: 100%;
+    max-width: 800px;
+}
+
+h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 24px;
+    color: var(--text-main);
+    border-left: 5px solid var(--primary-color);
+    padding-left: 15px;
+}
+
+/* Styling the data container */
+#output {
+    background: var(--card-bg);
+    padding: 24px;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    border: 1px solid #e5e7eb;
+    
+    /* Makes the JSON look clean */
+    white-space: pre-wrap;       
+    word-wrap: break-word;       
+    font-family: 'Fira Code', 'Courier New', monospace;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: #374151;
+}
+
+/* Loading state animation */
+#output:empty::before {
+    content: "Fetching data from Supabase...";
+    color: var(--text-muted);
+    font-style: italic;
+}
