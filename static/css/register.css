@@ -1,0 +1,59 @@
+body {
+    background-color: #f8fafc;
+    font-family: 'Inter', -apple-system, sans-serif;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.register-container {
+    width: 100%;
+    max-width: 400px;
+    padding: 20px;
+}
+
+.register-card {
+    background: white;
+    padding: 40px;
+    border-radius: 16px;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+    border: 1px solid #e2e8f0;
+}
+
+h2 { margin: 0 0 8px 0; color: #1e293b; text-align: center; }
+.subtitle { margin-bottom: 24px; color: #64748b; text-align: center; font-size: 0.9rem; }
+
+.input-group { margin-bottom: 16px; }
+.input-group label { display: block; margin-bottom: 6px; font-size: 0.85rem; font-weight: 600; color: #475569; }
+
+input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    box-sizing: border-box;
+    font-size: 1rem;
+    transition: border-color 0.2s;
+}
+
+input:focus { outline: none; border-color: #3b82f6; ring: 2px #3b82f6; }
+
+.btn-primary {
+    width: 100%;
+    padding: 12px;
+    background-color: #3b82f6; /* Register Blue */
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.btn-primary:hover { background-color: #2563eb; }
+
+.footer-links { text-align: center; margin-top: 20px; font-size: 0.85rem; color: #64748b; }
+.footer-links a { color: #3b82f6; text-decoration: none; font-weight: 600; }
