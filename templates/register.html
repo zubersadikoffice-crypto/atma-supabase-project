@@ -1,4 +1,4 @@
-
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -8,7 +8,6 @@
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
-
     <div class="register-container">
         <div class="register-card">
             <h2>Create Account</h2>
@@ -16,7 +15,23 @@
             
             <div class="input-group">
                 <label for="email">Email Address</label>
-                <input type="email" id="email" placeholder="name@company.com" required>
+                <input type="email" id="email" placeholder="name@nic.in" required>
+            </div>
+
+            <div class="input-group">
+                <label for="level">Administrative Level</label>
+                <select id="level" required style="width: 100%; padding: 10px; margin-top: 5px; border-radius: 4px;">
+                    <option value="">-- Select Level --</option>
+                    <option value="state">State</option>
+                    <option value="division">Division</option>
+                    <option value="district">District</option>
+                    <option value="taluk">Taluk</option>
+                </select>
+            </div>
+
+            <div class="input-group">
+                <label for="unit_name">Unit/Location Name</label>
+                <input type="text" id="unit_name" placeholder="e.g. Bangalore Urban or Mysore" required>
             </div>
 
             <div class="input-group">
@@ -26,13 +41,13 @@
 
             <div class="input-group">
                 <label for="confirm-password">Confirm Password</label>
-                <input type="password" id="confirm-password" placeholder="Repeat your password" required>
+                <input type="password" id="confirm-password" placeholder="Repeat password" required>
             </div>
 
             <button id="registerBtn" class="btn-primary">Sign Up</button>
 
             <div class="footer-links">
-                Already have an account? <a href="/templates/">Login here</a>
+                Already have an account? <a href="{{ url_for('login_page') }}">Login here</a>
             </div>
         </div>
     </div>

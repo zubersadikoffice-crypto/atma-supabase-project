@@ -1,4 +1,4 @@
-from flask import Flask, render_template, send_from_directory, redirect, url_for
+from flask import Flask, render_template, redirect, url_for, send_from_directory
 import os
 
 app = Flask(__name__, 
@@ -9,11 +9,11 @@ app = Flask(__name__,
 
 @app.route('/')
 def index():
-    # Redirect base URL to login page
     return redirect(url_for('login_page'))
 
 @app.route('/login')
 def login_page():
+    # Flask looks in the /templates folder automatically
     return render_template('login.html')
 
 @app.route('/register')
@@ -28,12 +28,13 @@ def dashboard_page():
 def logout_page():
     return render_template('logout.html')
 
-# --- STATIC FILE SERVING ---
-# This ensures your CSS/JS can be found even if the paths get tricky
-@app.route('/static/<path:path>')
-def send_static(path):
-    return send_from_directory('static', path)
+# --- FIX FOR PATHS ---
+# This ensures that your 'auth.js' and other assets load correctly 
+# regardless of how the browser requests them.
+@app.route('/static/<path:filename>')
+def custom_static(filename):
+    return send_from_directory(app.static_folder, filename)
 
 if __name__ == '__main__':
-    # Use port 8080 for GitHub Codespaces compatibility
+    # Running on 8080 is perfect for GitHub Codespaces
     app.run(host='0.0.0.0', port=8080, debug=True)

@@ -1,18 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../static/css/login.css">
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <title>Login</title>
+    <title>Login - Scheme Management</title>
 </head>
 <body>
     <div class="auth-card">
         <h2>Welcome Back</h2>
-        <input type="email" id="email" placeholder="Email">
-        <input type="password" id="password" placeholder="Password">
+        <p class="subtitle">Access the Administrative Dashboard</p>
+        <input type="email" id="email" placeholder="Official Email" required>
+        <input type="password" id="password" placeholder="Password" required>
         <button id="loginBtn">Login</button>
-        <p>New? <a href="/register.html">Register</a></p>
+        <p>New? <a href="{{ url_for('register_page') }}">Create an Account</a></p>
     </div>
+
     <script src="../static/js/auth.js"></script>
     <script src="../static/js/login.js"></script>
 </body>
