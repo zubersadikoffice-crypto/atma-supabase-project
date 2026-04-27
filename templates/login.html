@@ -3,18 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | Scheme Management System</title>
     <link rel="stylesheet" href="../static/css/login.css">
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <title>Login - Scheme Management</title>
 </head>
 <body>
     <div class="auth-card">
-        <h2>Welcome Back</h2>
-        <p class="subtitle">Access the Administrative Dashboard</p>
-        <input type="email" id="email" placeholder="Official Email" required>
-        <input type="password" id="password" placeholder="Password" required>
-        <button id="loginBtn">Login</button>
-        <p>New? <a href="{{ url_for('register_page') }}">Create an Account</a></p>
+        <h2>Sign In</h2>
+        <p class="subtitle">Enter your official credentials</p>
+        
+        <div class="input-group">
+            <label for="email">Official Email</label>
+            <input type="email" id="email" placeholder="name@nic.in" required autocomplete="email">
+        </div>
+
+        <div class="input-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" placeholder="••••••••" required autocomplete="current-password">
+        </div>
+
+        <button id="loginBtn">Secure Login</button>
+
+        <div class="footer-links">
+            Don't have an account? <a href="{{ url_for('register_page') }}">Register here</a>
+        </div>
     </div>
 
     <script src="../static/js/auth.js"></script>

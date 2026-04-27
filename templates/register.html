@@ -3,52 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register - Scheme Management</title>
-    <link rel="stylesheet" href="../static/css/register.css">
+    <title>Create Account | Scheme Management System</title>
+    <link rel="stylesheet" href="../static/css/login.css">
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
-    <div class="register-container">
-        <div class="register-card">
-            <h2>Create Account</h2>
-            <p class="subtitle">Join the Scheme Management System</p>
-            
-            <div class="input-group">
-                <label for="email">Email Address</label>
-                <input type="email" id="email" placeholder="name@nic.in" required>
-            </div>
+    <div class="auth-card" style="max-width: 450px;">
+        <h2>Staff Registration</h2>
+        <p class="subtitle">Join the Administrative Network</p>
+        
+        <div class="input-group">
+            <label for="full_name">Full Name</label>
+            <input type="text" id="full_name" placeholder="Enter your full name" required>
+        </div>
 
-            <div class="input-group">
-                <label for="level">Administrative Level</label>
-                <select id="level" required style="width: 100%; padding: 10px; margin-top: 5px; border-radius: 4px;">
-                    <option value="">-- Select Level --</option>
-                    <option value="state">State</option>
-                    <option value="division">Division</option>
-                    <option value="district">District</option>
-                    <option value="taluk">Taluk</option>
-                </select>
-            </div>
+        <div class="input-group">
+            <label for="email">Official Email</label>
+            <input type="email" id="email" placeholder="name@nic.in" required>
+        </div>
 
-            <div class="input-group">
-                <label for="unit_name">Unit/Location Name</label>
-                <input type="text" id="unit_name" placeholder="e.g. Bangalore Urban or Mysore" required>
-            </div>
+        <div class="input-group">
+            <label for="admin_level">Administrative Level</label>
+            <select id="admin_level" style="width:100%; padding:12px; border-radius:8px; border:1.5px solid #e2e8f0; margin-bottom:1.25rem;">
+                <option value="">-- Select Level --</option>
+                <option value="state">State HQ</option>
+                <option value="division">Division Office</option>
+                <option value="district">District Office</option>
+                <option value="taluk">Taluk Office</option>
+            </select>
+        </div>
 
-            <div class="input-group">
-                <label for="password">Password</label>
-                <input type="password" id="password" placeholder="Min. 6 characters" required>
-            </div>
+        <div class="input-group">
+            <label for="unit_name">Unit Name</label>
+            <input type="text" id="unit_name" placeholder="e.g., Dharwad or Bangalore Urban" required>
+        </div>
 
-            <div class="input-group">
-                <label for="confirm-password">Confirm Password</label>
-                <input type="password" id="confirm-password" placeholder="Repeat password" required>
-            </div>
+        <div class="input-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" placeholder="Min. 6 characters" required>
+        </div>
 
-            <button id="registerBtn" class="btn-primary">Sign Up</button>
+        <button id="registerBtn">Create Account</button>
 
-            <div class="footer-links">
-                Already have an account? <a href="{{ url_for('login_page') }}">Login here</a>
-            </div>
+        <div class="footer-links">
+            Already registered? <a href="{{ url_for('login_page') }}">Login here</a>
         </div>
     </div>
 
