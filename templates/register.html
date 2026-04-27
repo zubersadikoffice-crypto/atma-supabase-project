@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create Account | Scheme Management System</title>
-    <link rel="stylesheet" href="../static/css/login.css">
+    <title>Staff Registration | Scheme Management</title>
+    <link rel="stylesheet" href="/static/css/register.css">
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
-    <div class="auth-card" style="max-width: 450px;">
+    <div class="auth-card">
         <h2>Staff Registration</h2>
-        <p class="subtitle">Join the Administrative Network</p>
+        <p class="subtitle">Agricultural Technology Management System</p>
         
         <div class="input-group">
             <label for="full_name">Full Name</label>
@@ -23,24 +23,21 @@
         </div>
 
         <div class="input-group">
-            <label for="admin_level">Administrative Level</label>
-            <select id="admin_level" style="width:100%; padding:12px; border-radius:8px; border:1.5px solid #e2e8f0; margin-bottom:1.25rem;">
-                <option value="">-- Select Level --</option>
-                <option value="state">State HQ</option>
-                <option value="division">Division Office</option>
-                <option value="district">District Office</option>
-                <option value="taluk">Taluk Office</option>
-            </select>
+            <label>Assigned Schemes</label>
+            <div id="checkbox_container" class="scheme-checkbox-list">
+                <p class="loading-text">Loading schemes...</p>
+            </div>
+            <div id="selection_count" class="selection-badge">0 Schemes Selected</div>
         </div>
 
         <div class="input-group">
-            <label for="unit_name">Unit Name</label>
-            <input type="text" id="unit_name" placeholder="e.g., Dharwad or Bangalore Urban" required>
-        </div>
-
-        <div class="input-group">
-            <label for="password">Password</label>
+            <label for="password">Create Password</label>
             <input type="password" id="password" placeholder="Min. 6 characters" required>
+        </div>
+
+        <div class="input-group">
+            <label for="confirm_password">Confirm Password</label>
+            <input type="password" id="confirm_password" placeholder="Repeat password" required>
         </div>
 
         <button id="registerBtn">Create Account</button>
@@ -50,7 +47,14 @@
         </div>
     </div>
 
-    <script src="../static/js/auth.js"></script>
-    <script src="../static/js/register.js"></script>
+    <div id="statusOverlay" class="overlay" style="display:none;"></div>
+    <div id="statusDialog" class="dialog-box" style="display:none;">
+        <h3 id="dialogTitle">Status</h3>
+        <p id="dialogMessage"></p>
+        <button onclick="closeDialog()" class="dialog-btn">Okay</button>
+    </div>
+
+    <script src="/static/js/auth.js"></script>
+    <script src="/static/js/register.js"></script>
 </body>
 </html>
