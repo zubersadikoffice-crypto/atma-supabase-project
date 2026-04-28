@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Activity | ATMA System</title>
+    <link rel="stylesheet" href="/static/css/add_activity.css"> <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+
+    <div class="container">
+        <div class="activity-card">
+            <div class="card-nav">
+                <a href="javascript:history.back()" class="back-link">
+                    <i class="fa-solid fa-chevron-left"></i> Back
+                </a>
+            </div>
+            
+            <div class="card-header">
+                <i class="fa-solid fa-pen-to-square gradient-icon"></i>
+                <h2>Update Activity</h2>
+                <p>Modify details for activity <span id="displayCode" style="font-weight: 700; color: #0ea5e9;">...</span></p>
+            </div>
+
+            <form id="editForm">
+                <div class="row">
+                    <div class="input-group">
+                        <label><i class="fa-solid fa-calendar-check"></i> Financial Year</label>
+                        <select id="fySelect" disabled></select>
+                    </div>
+
+                    <div class="input-group">
+                        <label><i class="fa-solid fa-layer-group"></i> Scheme</label>
+                        <select id="schemeSelect" disabled></select>
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label><i class="fa-solid fa-fingerprint"></i> Activity ID / Code</label>
+                    <input type="text" id="activityCode" required>
+                </div>
+
+                <div class="input-group">
+                    <label><i class="fa-solid fa-pen-nib"></i> Activity Name</label>
+                    <input type="text" id="activityName" required>
+                </div>
+
+                <div class="input-group">
+                    <label><i class="fa-solid fa-align-left"></i> Description (Optional)</label>
+                    <textarea id="description" rows="4"></textarea>
+                </div>
+
+                <button type="submit" id="updateBtn">
+                    <span id="btnText">Save Changes</span>
+                    <i class="fa-solid fa-check"></i>
+                </button>
+            </form>
+
+            <div id="responseMsg" class="message"></div>
+        </div>
+    </div>
+
+    <script src="/static/js/auth.js"></script>
+    <script src="/static/js/edit_activity.js"></script>
+</body>
+</html>

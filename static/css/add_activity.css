@@ -1,0 +1,197 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Outfit', sans-serif;
+}
+
+body {
+    min-height: 100vh;
+    background: #fafafa;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.container {
+    width: 100%;
+    max-width: 500px;
+}
+
+.activity-card {
+    background: #ffffff;
+    border: 1px solid #dbdbdb;
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+.card-header {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.gradient-icon {
+    font-size: 2.5rem;
+    background: linear-gradient(45deg, #0ea5e9, #10b981);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 10px;
+}
+
+h2 {
+    font-size: 1.5rem;
+    color: #262626;
+}
+
+.card-header p {
+    font-size: 0.85rem;
+    color: #8e8e8e;
+    margin-top: 5px;
+}
+
+/* Form Styling */
+.row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+.input-group {
+    margin-bottom: 18px;
+}
+
+.input-group label {
+    display: block;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #475569;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+    letter-spacing: 0.5px;
+}
+
+.input-group label i {
+    color: #0ea5e9;
+    margin-right: 4px;
+}
+
+input, select, textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #dbdbdb;
+    border-radius: 8px;
+    background: #fafafa;
+    font-size: 0.95rem;
+    transition: all 0.2s;
+}
+
+input:focus, select:focus, textarea:focus {
+    outline: none;
+    border-color: #0ea5e9;
+    background: #fff;
+    box-shadow: 0 0 0 4px rgba(14, 165, 233, 0.1);
+}
+
+/* Big Action Button */
+#submitBtn {
+    width: 100%;
+    padding: 14px;
+    background: linear-gradient(45deg, #0ea5e9, #10b981);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    transition: transform 0.2s, opacity 0.2s;
+    margin-top: 10px;
+}
+
+#submitBtn:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);
+}
+
+#submitBtn:active {
+    transform: scale(0.98);
+}
+
+/* Responsive Logic */
+@media (max-width: 480px) {
+    .row {
+        grid-template-columns: 1fr;
+    }
+    .activity-card {
+        padding: 20px;
+    }
+}
+
+.message {
+    margin-top: 15px;
+    text-align: center;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+/* --- Card Navigation (Top-left Back Link) --- */
+.card-nav {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px; /* Space between back link and card header */
+}
+
+.back-link {
+    text-decoration: none;
+    color: #8e8e8e; /* Instagram-style muted grey */
+    font-size: 0.85rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 0;
+    transition: all 0.2s ease;
+}
+
+.back-link i {
+    font-size: 0.75rem; /* Make the arrow slightly smaller than text */
+    transition: transform 0.2s ease;
+}
+
+/* --- Hover Effects --- */
+.back-link:hover {
+    color: #262626; /* Darkens on hover */
+}
+
+.back-link:hover i {
+    transform: translateX(-3px); /* Subtle "nudge" animation to the left */
+}
+
+/* --- Focus State for Accessibility --- */
+.back-link:focus {
+    outline: none;
+    color: #0ea5e9; /* Sky blue focus */
+}
+
+select:disabled {
+    background-color: #f1f5f9;
+    color: #64748b;
+    cursor: not-allowed;
+    border-color: #e2e8f0;
+}
+
+.gradient-icon.fa-pen-to-square {
+    background: linear-gradient(45deg, #0ea5e9, #6366f1); /* Slightly more purple-blue for 'Edit' */
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+#updateBtn {
+    background: linear-gradient(45deg, #0ea5e9, #10b981);
+    /* ... rest of your button styling ... */
+}

@@ -1,70 +1,302 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap');
+
 :root {
-    --primary: #4f46e5;
-    --danger: #ef4444;
-    --bg: #f8fafc;
-    --card: #ffffff;
-    --text-dark: #1e293b;
-    --text-muted: #64748b;
+    --sky-blue: #0ea5e9;
+    --insta-green: #10b981;
+    --bg-grey: #fafafa;
+    --border: #dbdbdb;
+    --text-dark: #262626;
+    --nav-height: 70px;
 }
 
-* { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; }
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Outfit', sans-serif;
+}
 
-body { background: var(--bg); color: var(--text-dark); }
+body {
+    background-color: var(--bg-grey);
+    color: var(--text-dark);
+    min-height: 100vh;
+}
 
-/* Navigation */
+/* --- TOP NAVIGATION (Instagram Style) --- */
 .top-nav {
+    height: var(--nav-height);
+    background: #ffffff;
+    border-bottom: 1px solid var(--border);
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    background: var(--card);
-    padding: 15px 40px;
-    border-bottom: 2px solid #e2e8f0;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    justify-content: space-between;
+    padding: 0 10%;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
 }
 
-.logo-area { display: flex; align-items: center; gap: 10px; }
-.portal-badge { background: var(--primary); color: white; padding: 5px 10px; border-radius: 6px; font-weight: 800; }
-.portal-name { font-weight: 700; font-size: 1.1rem; }
+.logo-area {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
 
-.user-controls { display: flex; align-items: center; gap: 20px; }
-.user-meta { text-align: right; line-height: 1.2; }
-#welcomeText { display: block; font-weight: 700; font-size: 0.95rem; }
-#userEmail { color: var(--text-muted); font-size: 0.8rem; }
+.portal-badge {
+    background: linear-gradient(45deg, var(--sky-blue), var(--insta-green));
+    color: white;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-weight: 800;
+    font-size: 0.9rem;
+}
+
+.portal-name {
+    font-weight: 700;
+    font-size: 1.2rem;
+    letter-spacing: -0.5px;
+}
+
+.user-controls {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.user-meta {
+    text-align: right;
+    display: flex;
+    flex-direction: column;
+}
+
+#welcomeText {
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+#userEmail {
+    font-size: 0.75rem;
+    color: #8e8e8e;
+}
 
 .logout-btn {
-    background: #fee2e2; color: var(--danger); border: 1px solid #fecaca;
-    padding: 8px 16px; border-radius: 8px; font-weight: 600; cursor: pointer; transition: 0.2s;
+    background: none;
+    border: 1px solid var(--border);
+    padding: 8px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.85rem;
+    transition: all 0.2s;
 }
-.logout-btn:hover { background: var(--danger); color: white; }
 
-/* Selection Bar */
-.dashboard-content { max-width: 1200px; margin: 30px auto; padding: 0 20px; }
+.logout-btn:hover {
+    background-color: #fff1f2;
+    color: #e11d48;
+    border-color: #fda4af;
+}
 
+/* --- DASHBOARD CONTENT --- */
+.dashboard-content {
+    max-width: 900px;
+    margin: 30px auto;
+    padding: 0 20px;
+}
+
+/* Selection Bar (The Filters) */
 .selection-bar {
-    background: var(--card);
-    padding: 25px;
-    border-radius: 15px;
-    display: flex;
+    background: #ffffff;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    display: grid;
+    grid-template-columns: 1fr 2fr auto;
     gap: 20px;
     align-items: flex-end;
-    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
-    margin-bottom: 30px;
+    margin-bottom: 25px;
 }
 
-.input-box { flex: 1; }
-.input-box label { display: block; font-size: 0.8rem; font-weight: 700; color: var(--text-muted); margin-bottom: 8px; }
+.input-box {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.input-box label {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #8e8e8e;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.input-box label i {
+    color: var(--sky-blue);
+}
+
 select {
-    width: 100%; padding: 12px; border: 2px solid #e2e8f0; border-radius: 10px; 
-    font-size: 1rem; background: #fdfdfd; cursor: pointer;
+    padding: 10px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background-color: #fafafa;
+    font-size: 0.9rem;
+    outline: none;
+    cursor: pointer;
+}
+
+select:focus {
+    border-color: var(--sky-blue);
 }
 
 .refresh-btn {
-    background: var(--primary); color: white; border: none; padding: 12px 25px;
-    border-radius: 10px; font-weight: 700; cursor: pointer; transition: 0.2s;
+    background: linear-gradient(45deg, var(--sky-blue), var(--insta-green));
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
 }
-.refresh-btn:hover { background: #4338ca; transform: translateY(-1px); }
 
-/* Display Area */
-.display-card { background: var(--card); border-radius: 15px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); overflow: hidden; }
-.card-header { padding: 15px 25px; background: #f1f5f9; border-bottom: 1px solid #e2e8f0; }
-.card-body { padding: 40px; text-align: center; color: var(--text-muted); font-size: 1.1rem; }
+.refresh-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2);
+}
+
+/* --- DISPLAY CARD --- */
+.display-card {
+    background: #ffffff;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.card-header {
+    padding: 15px 20px;
+    border-bottom: 1px solid #efefef;
+    background-color: #fff;
+}
+
+.card-header h3 {
+    font-size: 1rem;
+    font-weight: 700;
+}
+
+.card-body {
+    padding: 40px 20px;
+    text-align: center;
+    color: #8e8e8e;
+}
+
+/* --- RESPONSIVE DESIGN (Phone & Tablet) --- */
+
+/* Tablets & Small Desktops */
+@media (max-width: 1024px) {
+    .top-nav {
+        padding: 0 5%;
+    }
+}
+
+/* Mobile Devices */
+@media (max-width: 768px) {
+    .top-nav {
+        padding: 0 15px;
+    }
+
+    .user-meta {
+        display: none; /* Hide email on small mobile to save space */
+    }
+
+    .portal-name {
+        font-size: 1rem;
+    }
+
+    .selection-bar {
+        grid-template-columns: 1fr; /* Stack inputs vertically */
+        gap: 15px;
+        padding: 15px;
+    }
+
+    .refresh-btn {
+        width: 100%; /* Full width button on mobile */
+    }
+
+    .dashboard-content {
+        margin: 15px auto;
+    }
+}
+
+/* Extra Small Phones */
+@media (max-width: 400px) {
+    .portal-badge {
+        font-size: 0.7rem;
+        padding: 2px 6px;
+    }
+    
+    .logout-btn {
+        padding: 8px 10px;
+        font-size: 0.75rem;
+    }
+}
+/* --- Add Activity Navigation Button --- */
+.add-nav-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    /* Sky Blue to Fresh Green Gradient */
+    background: linear-gradient(45deg, #0ea5e9, #10b981);
+    color: white;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 10px;
+    font-size: 0.9rem;
+    font-weight: 700;
+    white-space: nowrap;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 15px rgba(14, 165, 233, 0.25);
+    border: none;
+}
+
+.add-nav-btn i {
+    font-size: 1rem;
+}
+
+/* --- Hover & Interaction --- */
+.add-nav-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(16, 185, 129, 0.35);
+    opacity: 0.95;
+}
+
+.add-nav-btn:active {
+    transform: translateY(0) scale(0.96);
+}
+
+/* --- Responsive Transformation (Mobile/Tablet) --- */
+@media (max-width: 768px) {
+    /* Hide the text label on smaller screens */
+    .add-nav-btn span {
+        display: none;
+    }
+    
+    /* Transform into a Floating Action Button (FAB) */
+    .add-nav-btn {
+        position: fixed;
+        bottom: 25px;
+        right: 25px;
+        width: 60px;
+        height: 60px;
+        padding: 0;
+        border-radius: 50%; /* Perfect Circle */
+        justify-content: center;
+        z-index: 999;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    }
+
+    .add-nav-btn i {
+        font-size: 1.4rem; /* Make the + icon larger for thumb-tapping */
+    }
+}

@@ -27,6 +27,21 @@ def dashboard_page():
     # This will be your main hub for State/District data
     return render_template('dashboard.html')
 
+@app.route('/add_activity')
+def add_activity_page():
+    # This will be your main hub for State/District data
+    return render_template('add_activity.html')
+
+@app.route('/manage_activity')
+def manage_activity_page():
+    # This will be your main hub for State/District data
+    return render_template('activities_dashboard.html')
+
+@app.route('/edit_activity/<int:activity_id>')
+def edit_activity_page(activity_id):
+    # This route accepts the ID and renders the edit template
+    return render_template('edit_activity.html')
+
 @app.route('/logout')
 def logout_page():
     return render_template('logout.html')

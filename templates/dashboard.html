@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,6 +9,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
+
 <body>
     <nav class="top-nav">
         <div class="logo-area">
@@ -15,6 +17,10 @@
             <span class="portal-name">Staff Portal</span>
         </div>
         <div class="user-controls">
+            <a href="{{ url_for('manage_activity_page') }}" class="add-nav-btn">
+                <i class="fa-solid fa-plus"></i>
+                <span>Activity</span>
+            </a>
             <div class="user-meta">
                 <span id="welcomeText">Loading...</span>
                 <small id="userEmail">---</small>
@@ -59,4 +65,5 @@
     <script src="/static/js/auth.js"></script>
     <script src="/static/js/dashboard.js"></script>
 </body>
+
 </html>

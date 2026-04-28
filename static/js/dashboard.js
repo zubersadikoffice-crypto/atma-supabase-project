@@ -43,7 +43,7 @@ async function loadYears() {
     const yearSelect = document.getElementById('yearSelect');
     try {
         const { data, error } = await _supabase
-            .from('academic_years')
+            .from('financial_years')
             .select('*')
             .order('year_label', { ascending: false });
 
