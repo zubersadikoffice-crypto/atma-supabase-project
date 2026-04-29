@@ -42,6 +42,11 @@ def activity_idea_page():
     # This will be your main hub for State/District data
     return render_template('activity_idea.html')
 
+@app.route('/dashboard_idea')
+def dashboard_idea_page():
+    # This will be your main hub for State/District data
+    return render_template('dashboard_idea.html')
+
 @app.route('/edit_activity/<activity_id>')
 def edit_activity_page(activity_id):
     # Pass the ID to the template so your JS on that page knows which record to fetch
