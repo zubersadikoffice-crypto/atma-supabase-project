@@ -3,300 +3,166 @@
 :root {
     --sky-blue: #0ea5e9;
     --insta-green: #10b981;
+    --primary-grad: linear-gradient(45deg, var(--sky-blue), var(--insta-green));
     --bg-grey: #fafafa;
     --border: #dbdbdb;
     --text-dark: #262626;
-    --nav-height: 70px;
+    --nav-height: 75px;
 }
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Outfit', sans-serif;
-}
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Outfit', sans-serif; }
+body { background-color: var(--bg-grey); color: var(--text-dark); min-height: 100vh; overflow-x: hidden; }
 
-body {
-    background-color: var(--bg-grey);
-    color: var(--text-dark);
-    min-height: 100vh;
-}
-
-/* --- TOP NAVIGATION (Instagram Style) --- */
+/* --- UPDATED NAVIGATION --- */
 .top-nav {
     height: var(--nav-height);
     background: #ffffff;
     border-bottom: 1px solid var(--border);
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    padding: 0 10%;
+    justify-content: flex-start; /* Align everything to the left */
+    padding: 0 4%;
     position: sticky;
     top: 0;
     z-index: 1000;
+    gap: 20px; /* Space between logo and switcher */
 }
 
-.logo-area {
+.logo-area { 
+    display: flex; 
+    align-items: center; 
+    gap: 8px; 
+    flex-shrink: 0; /* Prevents logo from squishing */
+}
+.portal-badge { background: var(--primary-grad); color: white; padding: 4px 10px; border-radius: 6px; font-weight: 800; font-size: 0.85rem; }
+.portal-name { font-weight: 700; font-size: 1.1rem; white-space: nowrap; }
+
+/* --- UPDATED CONTEXT SWITCHER --- */
+.context-switcher {
     display: flex;
     align-items: center;
-    gap: 10px;
-}
-
-.portal-badge {
-    background: linear-gradient(45deg, var(--sky-blue), var(--insta-green));
-    color: white;
-    padding: 4px 10px;
-    border-radius: 6px;
-    font-weight: 800;
-    font-size: 0.9rem;
-}
-
-.portal-name {
-    font-weight: 700;
-    font-size: 1.2rem;
-    letter-spacing: -0.5px;
-}
-
-.user-controls {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-}
-
-.user-meta {
-    text-align: right;
-    display: flex;
-    flex-direction: column;
-}
-
-#welcomeText {
-    font-weight: 600;
-    font-size: 0.9rem;
-}
-
-#userEmail {
-    font-size: 0.75rem;
-    color: #8e8e8e;
-}
-
-.logout-btn {
-    background: none;
+    gap: 8px;
+    background: #f8fafc;
+    padding: 5px 12px;
+    border-radius: 12px;
     border: 1px solid var(--border);
-    padding: 8px 16px;
-    border-radius: 8px;
-    cursor: pointer;
+    flex-grow: 0; /* Remove flex-grow so it doesn't take middle space */
+    max-width: 500px;
+}
+.input-group { display: flex; align-items: center; gap: 5px; color: #64748b; }
+.input-group i { font-size: 0.85rem; color: var(--sky-blue); }
+
+select {
+    padding: 6px 5px;
+    border: none;
+    background: transparent;
+    font-size: 0.8rem;
     font-weight: 600;
-    font-size: 0.85rem;
+    cursor: pointer;
+    outline: none;
+    max-width: 120px; /* Prevents long scheme names from breaking layout */
+    text-overflow: ellipsis;
+}
+
+/* --- UPDATED USER CONTROLS --- */
+.user-controls { 
+    display: flex; 
+    align-items: center; 
+    gap: 12px; 
+    flex-shrink: 0; 
+    margin-left: auto; /* This pushes ONLY the user controls to the far right */
+}
+.user-meta { text-align: right; line-height: 1.2; }
+#welcomeText { font-weight: 600; font-size: 0.85rem; display: block; white-space: nowrap; }
+#userEmail { font-size: 0.7rem; color: #8e8e8e; white-space: nowrap; }
+
+.add-nav-btn {
+    display: flex; 
+    align-items: center; 
+    gap: 6px;
+    background: var(--primary-grad); 
+    color: white;
+    text-decoration: none; 
+    padding: 8px 14px; 
+    border-radius: 8px;
+    font-size: 0.85rem; 
+    font-weight: 700;
+    white-space: nowrap; /* Forces "Activity" text to stay on one line */
     transition: all 0.2s;
 }
 
-.logout-btn:hover {
-    background-color: #fff1f2;
-    color: #e11d48;
-    border-color: #fda4af;
-}
-
-/* --- DASHBOARD CONTENT --- */
-.dashboard-content {
-    max-width: 900px;
-    margin: 30px auto;
-    padding: 0 20px;
-}
-
-/* Selection Bar (The Filters) */
-.selection-bar {
-    background: #ffffff;
+.logout-btn {
+    background: none; 
     border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 20px;
-    display: grid;
-    grid-template-columns: 1fr 2fr auto;
-    gap: 20px;
-    align-items: flex-end;
-    margin-bottom: 25px;
-}
-
-.input-box {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-}
-
-.input-box label {
-    font-size: 0.75rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    color: #8e8e8e;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-}
-
-.input-box label i {
-    color: var(--sky-blue);
-}
-
-select {
-    padding: 10px;
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    background-color: #fafafa;
-    font-size: 0.9rem;
-    outline: none;
+    padding: 8px 10px; 
+    border-radius: 8px; 
     cursor: pointer;
+    color: #ef4444;
 }
 
-select:focus {
-    border-color: var(--sky-blue);
-}
+/* --- MAIN CONTENT --- */
+.dashboard-content { max-width: 900px; margin: 30px auto; padding: 0 15px; }
+.display-card { background: #ffffff; border: 1px solid var(--border); border-radius: 12px; }
+.card-header { padding: 15px 20px; border-bottom: 1px solid #efefef; }
+.card-body { padding: 40px 20px; text-align: center; min-height: 200px; }
 
-.refresh-btn {
-    background: linear-gradient(45deg, var(--sky-blue), var(--insta-green));
-    color: white;
-    border: none;
-    padding: 12px 24px;
-    border-radius: 8px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: transform 0.2s, box-shadow 0.2s;
-}
+/* --- RESPONSIVE BREAKPOINTS --- */
 
-.refresh-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2);
-}
-
-/* --- DISPLAY CARD --- */
-.display-card {
-    background: #ffffff;
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    overflow: hidden;
-}
-
-.card-header {
-    padding: 15px 20px;
-    border-bottom: 1px solid #efefef;
-    background-color: #fff;
-}
-
-.card-header h3 {
-    font-size: 1rem;
-    font-weight: 700;
-}
-
-.card-body {
-    padding: 40px 20px;
-    text-align: center;
-    color: #8e8e8e;
-}
-
-/* --- RESPONSIVE DESIGN (Phone & Tablet) --- */
-
-/* Tablets & Small Desktops */
+/* 1. Large Tablets (Landscape) */
 @media (max-width: 1024px) {
+    .top-nav { padding: 0 2%; }
+    .portal-name { font-size: 1rem; }
+    select { max-width: 100px; }
+}
+
+/* 2. Tablets (Portrait) - Hiding non-essential text */
+@media (max-width: 900px) {
+    #userEmail { display: none; }
+    .portal-name { display: none; }
+    .context-switcher { max-width: 400px; }
+}
+
+/* 3. Mobile Devices (Android/iOS) */
+@media (max-width: 650px) {
     .top-nav {
-        padding: 0 5%;
-    }
-}
-
-/* Mobile Devices */
-@media (max-width: 768px) {
-    .top-nav {
-        padding: 0 15px;
+        height: auto;
+        padding: 10px 15px;
+        flex-wrap: wrap; /* Wraps items into two rows if needed */
+        justify-content: space-between;
     }
 
-    .user-meta {
-        display: none; /* Hide email on small mobile to save space */
+    .context-switcher {
+        order: 3; /* Moves Year/Scheme to a new row below the logo/controls */
+        width: 100%;
+        max-width: none;
+        margin-top: 8px;
+        justify-content: space-around;
     }
 
-    .portal-name {
-        font-size: 1rem;
-    }
-
-    .selection-bar {
-        grid-template-columns: 1fr; /* Stack inputs vertically */
-        gap: 15px;
-        padding: 15px;
-    }
-
-    .refresh-btn {
-        width: 100%; /* Full width button on mobile */
-    }
-
-    .dashboard-content {
-        margin: 15px auto;
-    }
-}
-
-/* Extra Small Phones */
-@media (max-width: 400px) {
-    .portal-badge {
-        font-size: 0.7rem;
-        padding: 2px 6px;
-    }
-    
-    .logout-btn {
-        padding: 8px 10px;
-        font-size: 0.75rem;
-    }
-}
-/* --- Add Activity Navigation Button --- */
-.add-nav-btn {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    /* Sky Blue to Fresh Green Gradient */
-    background: linear-gradient(45deg, #0ea5e9, #10b981);
-    color: white;
-    text-decoration: none;
-    padding: 10px 20px;
-    border-radius: 10px;
-    font-size: 0.9rem;
-    font-weight: 700;
-    white-space: nowrap;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: 0 4px 15px rgba(14, 165, 233, 0.25);
-    border: none;
-}
-
-.add-nav-btn i {
-    font-size: 1rem;
-}
-
-/* --- Hover & Interaction --- */
-.add-nav-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(16, 185, 129, 0.35);
-    opacity: 0.95;
-}
-
-.add-nav-btn:active {
-    transform: translateY(0) scale(0.96);
-}
-
-/* --- Responsive Transformation (Mobile/Tablet) --- */
-@media (max-width: 768px) {
-    /* Hide the text label on smaller screens */
-    .add-nav-btn span {
-        display: none;
-    }
-    
-    /* Transform into a Floating Action Button (FAB) */
+    .add-nav-btn span { display: none; } /* Hides "Activity" text, keeps + icon */
     .add-nav-btn {
-        position: fixed;
-        bottom: 25px;
-        right: 25px;
-        width: 60px;
-        height: 60px;
-        padding: 0;
-        border-radius: 50%; /* Perfect Circle */
-        justify-content: center;
-        z-index: 999;
-        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        padding: 10px;
+        border-radius: 50%; /* Circular button for mobile */
     }
 
-    .add-nav-btn i {
-        font-size: 1.4rem; /* Make the + icon larger for thumb-tapping */
-    }
+    .user-meta { display: none; } /* Welcome text hidden on tiny screens */
+    
+    .logo-area { order: 1; }
+    .user-controls { order: 2; gap: 8px; }
+
+    .view-active-text { font-size: 0.95rem; }
+}
+
+/* 4. Extra Small Screens */
+@media (max-width: 380px) {
+    .portal-badge { font-size: 0.7rem; padding: 3px 6px; }
+    select { font-size: 0.75rem; max-width: 80px; }
+}
+
+/* ANIMATIONS */
+#viewStatusText { transition: all 0.3s ease-in-out; }
+.view-active-text { animation: fadeIn 0.5s; }
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(5px); }
+    to { opacity: 1; transform: translateY(0); }
 }

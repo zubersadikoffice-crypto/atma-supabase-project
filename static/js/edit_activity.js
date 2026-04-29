@@ -75,7 +75,7 @@ async function handleUpdate(e) {
         
         // Wait and redirect back to dashboard
         setTimeout(() => {
-            window.location.href = "/manage_activity"; 
+            window.location.href = "/activity"; 
         }, 1500);
     }
 }

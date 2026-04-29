@@ -10,34 +10,73 @@ document.addEventListener('DOMContentLoaded', async () => {
     const user = session.user;
     
     // 2. Set Profile Info
-    document.getElementById('welcomeText').innerText = `Welcome, ${user.user_metadata.full_name || 'Officer'}`;
-    document.getElementById('userEmail').innerText = user.email;
+    const welcomeEl = document.getElementById('welcomeText');
+    const emailEl = document.getElementById('userEmail');
+
+    if (welcomeEl) welcomeEl.innerText = `Welcome, ${user.user_metadata.full_name || 'Officer'}`;
+    if (emailEl) emailEl.innerText = user.email;
 
     // 3. Load Dynamic Filters
-    await loadYears();
-    await loadUserSchemes(user.id);
+    // We use await to ensure dropdowns are full before we try to read them
+    await Promise.all([loadYears(), loadUserSchemes(user.id)]);
 
-    // 4. Update View Logic
-    document.getElementById('updateViewBtn').addEventListener('click', () => {
-        const year = document.getElementById('yearSelect').selectedOptions[0].text;
-        const scheme = document.getElementById('schemeSelect').selectedOptions[0].text;
-        
-        document.getElementById('viewStatusText').innerHTML = 
-            `Viewing Data for <strong>${scheme}</strong> during the <strong>${year}</strong> cycle.`;
-    });
+    // 4. Instant Update & Persistence Logic
+    const yearSelect = document.getElementById('yearSelect');
+    const schemeSelect = document.getElementById('schemeSelect');
 
-    // 5. Logout Logic
-    document.getElementById('logoutBtn').addEventListener('click', async () => {
-        const { error } = await _supabase.auth.signOut();
-        if (error) {
-            console.error("Logout Error:", error.message);
-        } else {
-            window.location.href = "/login";
+    const handleAutoUpdate = () => {
+        const yearId = yearSelect.value; 
+        const schemeId = schemeSelect.value;
+        const yearText = yearSelect.selectedOptions[0]?.text;
+        const schemeText = schemeSelect.selectedOptions[0]?.text;
+
+        // Check if both are selected and not in "Loading..." state
+        if (yearId && schemeId && !yearText.includes('...') && !schemeText.includes('...')) {
+            
+            // --- CRITICAL: Save to sessionStorage so Activity Manager can see them ---
+            sessionStorage.setItem('activeYearId', yearId);
+            sessionStorage.setItem('activeSchemeId', schemeId);
+
+            const statusBox = document.getElementById('viewStatusText');
+            if (statusBox) {
+                statusBox.classList.remove('empty-state');
+                statusBox.innerHTML = `
+                    <div class="view-active-text">
+                        Viewing Data for <span class="highlight-scheme">${schemeText}</span> 
+                        during the <span class="highlight-year">${yearText}</span> cycle.
+                    </div>
+                `;
+            }
         }
-    });
+    };
+
+    // Attach listeners to both dropdowns for instant updates
+    yearSelect.addEventListener('change', handleAutoUpdate);
+    schemeSelect.addEventListener('change', handleAutoUpdate);
+
+    // 5. Restore previous selection if user returns to dashboard
+    const savedYear = sessionStorage.getItem('activeYearId');
+    const savedScheme = sessionStorage.getItem('activeSchemeId');
+    
+    if (savedYear) yearSelect.value = savedYear;
+    if (savedScheme) schemeSelect.value = savedScheme;
+
+    // Trigger update once on load to populate the text
+    handleAutoUpdate();
+
+    // 6. Logout Logic
+    const logoutBtn = document.getElementById('logoutBtn');
+    if (logoutBtn) {
+        logoutBtn.addEventListener('click', async () => {
+            sessionStorage.clear(); // Clear context on logout
+            await _supabase.auth.signOut();
+            window.location.href = "/login";
+        });
+    }
 });
 
-/** * Fetches years from academic_years table 
+/**
+ * Fetches years from financial_years table
  */
 async function loadYears() {
     const yearSelect = document.getElementById('yearSelect');
@@ -50,11 +89,12 @@ async function loadYears() {
         if (error) throw error;
         yearSelect.innerHTML = data.map(y => `<option value="${y.id}">${y.year_label}</option>`).join('');
     } catch (e) {
-        yearSelect.innerHTML = '<option disabled>Error loading years</option>';
+        yearSelect.innerHTML = '<option disabled>Error</option>';
     }
 }
 
-/** * Fetches ONLY the schemes assigned to this user in user_schemes table
+/**
+ * Fetches schemes assigned to the specific user
  */
 async function loadUserSchemes(userId) {
     const schemeSelect = document.getElementById('schemeSelect');
@@ -71,10 +111,10 @@ async function loadUserSchemes(userId) {
                 `<option value="${item.scheme_id}">${item.schemes.scheme_name}</option>`
             ).join('');
         } else {
-            schemeSelect.innerHTML = '<option disabled>No assigned schemes found.</option>';
+            schemeSelect.innerHTML = '<option disabled>No Schemes Assigned</option>';
         }
     } catch (e) {
         console.error(e);
-        schemeSelect.innerHTML = '<option disabled>Error loading schemes</option>';
+        schemeSelect.innerHTML = '<option disabled>Error</option>';
     }
 }

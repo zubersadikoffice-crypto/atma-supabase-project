@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Activity Management Hub | Complete & Fixed</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0ea5e9;
+            --primary-dark: #0284c7;
+            --bg: #f1f5f9;
+            --text: #1e293b;
+            --white: #ffffff;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Outfit', sans-serif; }
+        body { background-color: var(--bg); color: var(--text); min-height: 100vh; overflow-x: hidden; }
+
+        /* --- DASHBOARD CANVAS --- */
+        .hub-wrapper {
+            display: flex; justify-content: center; align-items: center;
+            min-height: 100vh; padding: 50px; position: relative;
+        }
+
+        #connection-svg {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 0; pointer-events: none;
+        }
+
+        .line { stroke: #cbd5e1; stroke-width: 2; stroke-dasharray: 4; transition: 0.3s; }
+
+        .core-activity {
+            width: 240px; height: 240px; background: var(--white);
+            border: 10px solid var(--primary); border-radius: 50%;
+            display: flex; flex-direction: column; justify-content: center;
+            align-items: center; text-align: center; z-index: 10;
+            box-shadow: 0 25px 50px -12px rgba(14, 165, 233, 0.4);
+            padding: 20px;
+        }
+
+        .node {
+            position: absolute; width: 160px; padding: 15px;
+            background: var(--white); border: 2px solid #e2e8f0; border-radius: 20px;
+            text-align: center; cursor: pointer; z-index: 10;
+            transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        .node:hover { transform: scale(1.1); border-color: var(--primary); z-index: 100; }
+        .node i { font-size: 1.6rem; color: var(--primary); margin-bottom: 8px; display: block; }
+        .node h4 { font-size: 0.85rem; font-weight: 700; color: #334155; }
+
+        /* --- MODAL SYSTEM --- */
+        .modal-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(15, 23, 42, 0.7); backdrop-filter: blur(8px);
+            display: none; justify-content: center; align-items: center; z-index: 2000;
+        }
+        .modal-card {
+            background: var(--white); width: 95%; max-width: 500px; border-radius: 24px;
+            padding: 35px; position: relative; max-height: 90vh; overflow-y: auto;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+        .modal-header { display: flex; align-items: center; gap: 15px; margin-bottom: 20px; color: var(--primary); }
+        .close-btn { position: absolute; top: 20px; right: 20px; cursor: pointer; color: #94a3b8; font-size: 1.5rem; }
+
+        /* --- FORM STYLING --- */
+        .form-group { margin-bottom: 15px; }
+        .form-group label { display: block; font-size: 0.8rem; font-weight: 700; margin-bottom: 5px; color: #64748b; }
+        input, select, textarea {
+            width: 100%; padding: 12px; border: 2px solid #f1f5f9; border-radius: 10px;
+            font-size: 0.95rem; background: #f8fafc; outline: none;
+        }
+        input:focus { border-color: var(--primary); background: #fff; }
+
+        .btn-save {
+            width: 100%; background: var(--primary); color: white; padding: 15px;
+            border: none; border-radius: 12px; font-weight: 700; font-size: 1rem;
+            cursor: pointer; transition: 0.2s; margin-top: 10px;
+        }
+        .btn-save:hover { background: var(--primary-dark); }
+
+        /* Statistics Table */
+        .stats-table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+        .stats-table th { font-size: 0.75rem; text-align: left; padding: 10px; background: #f1f5f9; border-radius: 5px; }
+        .stats-table td { padding: 10px 5px; border-bottom: 1px solid #f1f5f9; }
+        .stats-table input { width: 65px; padding: 8px; text-align: center; }
+
+        /* Mobile Switch */
+        @media (max-width: 1000px) {
+            .hub-wrapper { flex-direction: column; height: auto; padding: 20px; }
+            #connection-svg { display: none; }
+            .node { position: static !important; width: 100%; max-width: 500px; margin-bottom: 10px; transform: none !important; }
+            .core-activity { margin-bottom: 30px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="hub-wrapper" id="canvas">
+        <svg id="connection-svg"></svg>
+
+        <div class="core-activity" id="hub">
+            <span style="font-size: 0.7rem; font-weight: 800; color: var(--primary);">ACT-1004</span>
+            <h2 style="font-size: 1.3rem;">Management Hub</h2>
+            <div style="background: #e0f2fe; padding: 4px 12px; border-radius: 20px; font-size: 0.7rem; font-weight: 700; margin-top: 10px;">FY 2025-26</div>
+        </div>
+
+        <div class="node" data-key="log"><i class="fa-solid fa-calendar-days"></i><h4>Activity Log</h4><span>Timeline</span></div>
+        <div class="node" data-key="place"><i class="fa-solid fa-map-location-dot"></i><h4>Place & GPS</h4><span>Location</span></div>
+        <div class="node" data-key="bill"><i class="fa-solid fa-file-invoice-dollar"></i><h4>Billing</h4><span>Finance</span></div>
+        <div class="node" data-key="gender"><i class="fa-solid fa-venus-mars"></i><h4>Gender Count</h4><span>M/F Totals</span></div>
+        <div class="node" data-key="category"><i class="fa-solid fa-users-viewfinder"></i><h4>Social Stats</h4><span>Categories</span></div>
+        <div class="node" data-key="reg"><i class="fa-solid fa-user-plus"></i><h4>Registration</h4><span>Beneficiary</span></div>
+        <div class="node" data-key="officer"><i class="fa-solid fa-user-shield"></i><h4>Personnel</h4><span>Staff/VIP</span></div>
+        <div class="node" data-key="target"><i class="fa-solid fa-bullseye"></i><h4>Target</h4><span>Planned</span></div>
+        <div class="node" data-key="achieve"><i class="fa-solid fa-award"></i><h4>Achievement</h4><span>Actual</span></div>
+        <div class="node" data-key="photo"><i class="fa-solid fa-camera"></i><h4>Photo Upload</h4><span>Gallery</span></div>
+    </div>
+
+    <div id="modalOverlay" class="modal-overlay">
+        <div class="modal-card">
+            <span class="close-btn" onclick="closeModal()">&times;</span>
+            <div id="modalBody"></div>
+            <button class="btn-save" onclick="closeModal()">Update Module</button>
+        </div>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('canvas');
+        const hub = document.getElementById('hub');
+        const svg = document.getElementById('connection-svg');
+        const nodes = document.querySelectorAll('.node');
+
+        const modalData = {
+            log: { icon: 'fa-calendar-days', title: 'Activity Timeline', html: `
+                <div class="form-group"><label>Activity From Date</label><input type="date"></div>
+                <div class="form-group"><label>Activity To Date</label><input type="date"></div>` },
+            place: { icon: 'fa-map-location-dot', title: 'Geospatial Data', html: `
+                <div class="form-group"><label>Physical Address</label><textarea rows="2"></textarea></div>
+                <div style="display:flex; gap:10px">
+                    <div class="form-group"><label>Latitude</label><input type="text" placeholder="12.97"></div>
+                    <div class="form-group"><label>Longitude</label><input type="text" placeholder="77.59"></div>
+                </div>` },
+            bill: { icon: 'fa-file-invoice-dollar', title: 'Financial Management', html: `
+                <div class="form-group"><label>Bill Reference No.</label><input type="text"></div>
+                <div class="form-group"><label>Bill Date</label><input type="date"></div>
+                <div class="form-group"><label>Amount (₹)</label><input type="number"></div>
+                <div class="form-group"><label>Workflow Status</label><select><option>Pending</option><option>Completed</option><option>Rejected</option></select></div>` },
+            gender: { icon: 'fa-venus-mars', title: 'Headcount Summary', html: `
+                <div class="form-group"><label>Total Male Count</label><input type="number"></div>
+                <div class="form-group"><label>Total Female Count</label><input type="number"></div>` },
+            category: { icon: 'fa-users-viewfinder', title: 'Category Breakdown', html: `
+                <table class="stats-table">
+                    <tr><th>Social Category</th><th>Male</th><th>Female</th></tr>
+                    <tr><td>General</td><td><input type="number"></td><td><input type="number"></td></tr>
+                    <tr><td>OBC</td><td><input type="number"></td><td><input type="number"></td></tr>
+                    <tr><td>SC</td><td><input type="number"></td><td><input type="number"></td></tr>
+                    <tr><td>ST</td><td><input type="number"></td><td><input type="number"></td></tr>
+                    <tr><td>Minority</td><td><input type="number"></td><td><input type="number"></td></tr>
+                </table>` },
+            reg: { icon: 'fa-user-plus', title: 'Beneficiary Registration', html: `
+                <div class="form-group"><label>Beneficiary Name</label><input type="text"></div>
+                <div class="form-group"><label>Gender</label><select><option>Male</option><option>Female</option></select></div>
+                <div class="form-group"><label>Mobile Number</label><input type="tel"></div>
+                <div class="form-group"><label>Category</label><select><option>Gen</option><option>OBC</option><option>SC</option><option>ST</option></select></div>` },
+            officer: { icon: 'fa-user-shield', title: 'Personnel & Protocol', html: `
+                <div class="form-group"><label>Organizing Officer (Name/Desig/Office)</label><input type="text"></div>
+                <div class="form-group"><label>VIP/Guest Attendee</label><textarea rows="2"></textarea></div>` },
+            target: { icon: 'fa-bullseye', title: 'Physical & Financial Targets', html: `
+                <div class="form-group"><label>Physical Target (Units)</label><input type="number"></div>
+                <div class="form-group"><label>Financial Target (Budget ₹)</label><input type="number"></div>` },
+            achieve: { icon: 'fa-award', title: 'Actual Achievement', html: `
+                <div class="form-group"><label>Physical Achievement</label><input type="number"></div>
+                <div class="form-group"><label>Financial Achievement (Actual ₹)</label><input type="number"></div>` },
+            photo: { icon: 'fa-camera', title: 'Event Photography', html: `
+                <div style="border: 2px dashed #cbd5e1; padding: 30px; border-radius: 15px; text-align: center; background:#f8fafc">
+                    <i class="fa-solid fa-upload" style="font-size: 2rem; color: #94a3b8; margin-bottom:10px"></i>
+                    <p style="font-size:0.8rem">Click to capture or upload event photos</p>
+                    <input type="file" multiple hidden id="fileInp">
+                </div>` }
+        };
+
+        function initHub() {
+            if(window.innerWidth < 1000) return;
+            const centerX = canvas.offsetWidth / 2;
+            const centerY = canvas.offsetHeight / 2;
+            const orbitRadius = 340;
+
+            nodes.forEach((node, i) => {
+                const angle = (i * (2 * Math.PI / nodes.length)) - (Math.PI / 2);
+                const x = centerX + orbitRadius * Math.cos(angle) - (node.offsetWidth / 2);
+                const y = centerY + orbitRadius * Math.sin(angle) - (node.offsetHeight / 2);
+
+                node.style.left = `${x}px`;
+                node.style.top = `${y}px`;
+
+                const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+                line.setAttribute("x1", centerX); line.setAttribute("y1", centerY);
+                line.setAttribute("x2", x + node.offsetWidth/2); line.setAttribute("y2", y + node.offsetHeight/2);
+                line.setAttribute("class", "line");
+                svg.appendChild(line);
+
+                node.onclick = () => {
+                    const key = node.getAttribute('data-key');
+                    const config = modalData[key];
+                    document.getElementById('modalBody').innerHTML = `
+                        <div class="modal-header"><i class="fa-solid ${config.icon}"></i><h2>${config.title}</h2></div>
+                        ${config.html}`;
+                    document.getElementById('modalOverlay').style.display = 'flex';
+                };
+            });
+        }
+
+        function closeModal() { document.getElementById('modalOverlay').style.display = 'none'; }
+        window.onload = initHub;
+        window.onresize = () => { svg.innerHTML = ''; initHub(); };
+    </script>
+</body>
+</html>

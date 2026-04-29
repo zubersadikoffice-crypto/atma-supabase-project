@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add Activity | ATMA System</title>
-    <link rel="stylesheet" href="/static/css/add_activity.css">
+    <link rel="stylesheet" href="/static/css/new_activity.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -16,7 +16,7 @@
     <div class="container">
         <div class="activity-card">
             <div class="card-nav">
-                <a href="{{ url_for('manage_activity_page') }}" class="back-link">
+                <a href="{{ url_for('activity_page') }}" class="back-link">
                     <i class="fa-solid fa-chevron-left"></i> Back to Dashboard
                 </a>
             </div>
@@ -69,7 +69,7 @@
     </div>
 
     <script src="/static/js/auth.js"></script>
-    <script src="/static/js/add_activity.js"></script>
+    <script src="/static/js/new_activity.js"></script>
 </body>
 
 </html>

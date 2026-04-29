@@ -195,3 +195,17 @@ select:disabled {
     background: linear-gradient(45deg, #0ea5e9, #10b981);
     /* ... rest of your button styling ... */
 }
+
+/* Styling for the locked fields from the dashboard */
+select:disabled {
+    background-color: #f8fafc; /* Light gray-blue */
+    color: #64748b;            /* Muted text color */
+    cursor: not-allowed;       /* Show prohibition icon on hover */
+    border: 1px solid #e2e8f0;
+    opacity: 0.8;
+}
+
+/* Optional: Add a 'locked' icon appearance if you want to be fancy */
+.input-group has-lock {
+    position: relative;
+}
